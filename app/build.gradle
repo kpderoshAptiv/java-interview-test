@@ -28,3 +28,19 @@ application {
     // Define the main class for the application.
     mainClass = 'java.interview.test.App'
 }
+
+// Added this to include test classes and exclude utility classes from test execution
+test {
+    useJUnit()
+
+    include '**/*Test.class'
+    include '**/*Tests.class'
+    include '**/*TestCase.class'
+
+    exclude '**/Utility.class'
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+}
