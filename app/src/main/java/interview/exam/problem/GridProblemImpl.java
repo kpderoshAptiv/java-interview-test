@@ -11,14 +11,12 @@ public class GridProblemImpl implements IGridProblem {
             return false;
         }
 
-        if (pattern.length > grid.length) {
-            return false;
-        }
+        int gridHeight = grid.length;
+        int gridWidth = grid[0].length();
+        int patternHeight = pattern.length;
+        int patternWidth = pattern[0].length();
 
-        int gridWidth = grid[0] != null ? grid[0].length() : 0;
-        int patternWidth = pattern[0] != null ? pattern[0].length() : 0;
-
-        if (gridWidth == 0 || patternWidth == 0 || patternWidth > gridWidth) {
+        if (patternHeight > gridHeight || patternWidth > gridWidth) {
             return false;
         }
 
