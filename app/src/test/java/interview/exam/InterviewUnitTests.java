@@ -11,11 +11,49 @@ public class InterviewUnitTests {
 
     private final IGridProblem solver = new GridProblemImpl();
 
-    @Test
-    public void shouldReturnFalse_WhenGridOrPatternIsNull() {
-        assertFalse(solver.solveGrid(null, new String[] { "123" }));
-        assertFalse(solver.solveGrid(new String[] { "123" }, null));
-        assertFalse(solver.solveGrid(null, null));
+    @Test(expected = NullPointerException.class)
+    public void shouldThrowNullPointerException_WhenGridIsNull() {
+        solver.solveGrid(null, new String[] { "123" });
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldThrowNullPointerException_WhenPatternIsNull() {
+        solver.solveGrid(new String[] { "123" }, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentException_WhenGridIsJagged() {
+        String[] jaggedGrid = {
+                "1234",
+                "12",
+                "1234"
+        };
+        String[] pattern = { "12" };
+
+        solver.solveGrid(jaggedGrid, pattern);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentException_WhenPatternIsJagged() {
+        String[] grid = { "123", "456", "789" };
+        String[] jaggedPattern = {
+                "12",
+                "123"
+        };
+
+        solver.solveGrid(grid, jaggedPattern);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentException_WhenGridContainsNullRow() {
+        String[] brokenGrid = {
+                "123",
+                null,
+                "789"
+        };
+        String[] pattern = { "12" };
+
+        solver.solveGrid(brokenGrid, pattern);
     }
 
     @Test
