@@ -22,7 +22,7 @@ public class GridProblemImpl implements IGridProblem {
             return false;
         }
 
-        return false;
+        return true;
     }
 
 }
