@@ -35,7 +35,11 @@ public class InterviewUnitTests {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentException_WhenPatternIsJagged() {
-        String[] grid = { "123", "456", "789" };
+        String[] grid = {
+                "123",
+                "456",
+                "789"
+        };
         String[] jaggedPattern = {
                 "12",
                 "123"
@@ -56,6 +60,20 @@ public class InterviewUnitTests {
         solver.solveGrid(brokenGrid, pattern);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentException_WhenPatternContainsNullRow() {
+        String[] grid = {
+                "123",
+                "456"
+        };
+        String[] brokenPattern = {
+                "12",
+                null
+        };
+
+        solver.solveGrid(grid, brokenPattern);
+    }
+
     @Test
     public void shouldReturnFalse_WhenGridOrPatternIsEmpty() {
         assertFalse(solver.solveGrid(new String[] {}, new String[] { "123" }));
@@ -64,15 +82,26 @@ public class InterviewUnitTests {
 
     @Test
     public void shouldReturnFalse_WhenPatternIsTallerThanGrid() {
-        String[] grid = { "123", "456" };
-        String[] pattern = { "12", "34", "56" };
+        String[] grid = {
+                "123",
+                "456"
+        };
+        String[] pattern = {
+                "12",
+                "34",
+                "56"
+        };
 
         assertFalse(solver.solveGrid(grid, pattern));
     }
 
     @Test
     public void shouldReturnFalse_WhenPatternIsWiderThanGrid() {
-        String[] grid = { "123", "456" };
+        String[] grid = {
+                "123",
+                "456"
+
+        };
         String[] pattern = { "1234" };
 
         assertFalse(solver.solveGrid(grid, pattern));
@@ -88,6 +117,21 @@ public class InterviewUnitTests {
         String[] pattern = {
                 "78",
                 "bc"
+        };
+
+        assertTrue(solver.solveGrid(grid, pattern));
+    }
+
+    @Test
+    public void shouldReturnTrue_WhenPatternIsAtTopLeftCorner() {
+        String[] grid = {
+                "123",
+                "456",
+                "789"
+        };
+        String[] pattern = {
+                "12",
+                "45"
         };
 
         assertTrue(solver.solveGrid(grid, pattern));
